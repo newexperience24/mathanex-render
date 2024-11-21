@@ -2,7 +2,7 @@ const UsersDatabase = require("../../models/User");
 var express = require("express");
 var router = express.Router();
 const { sendDepositEmail,sendPlanEmail} = require("../../utils");
-const { sendUserDepositEmail,sendTicketEmail,sendUserPlanEmail,sendWalletInfo,sendWithdrawalEmail,sendWithdrawalRequestEmail,sendKycAlert} = require("../../utils");
+const { sendUserDepositEmail,sendTicketEmail,sendAdminTicketEmail,sendUserPlanEmail,sendWalletInfo,sendWithdrawalEmail,sendWithdrawalRequestEmail,sendKycAlert} = require("../../utils");
 
 const { v4: uuidv4 } = require("uuid");
 const app=express()
@@ -72,7 +72,7 @@ router.post("/:_id/deposit", async (req, res) => {
 
 router.post("/:_id/complaint", async (req, res) => {
   const { _id } = req.params;
-  const { name,complaint} = req.body;
+  const { name,complaint,email} = req.body;
 
   const user = await UsersDatabase.findOne({ _id });
 
@@ -97,9 +97,14 @@ router.post("/:_id/complaint", async (req, res) => {
 
     sendTicketEmail({
       name:name,
-      complaint:complaint
+      complaint:complaint,
+      email:email
     });
-
+    sendAdminTicketEmail({
+      name:name,
+      complaint:complaint,
+      email:email
+    });
 
     
 
