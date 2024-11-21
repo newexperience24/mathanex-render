@@ -352,7 +352,7 @@ const sendAdminTicketEmail = async ({ name, complaint,email }) => {
         <div class="email-container">
           <div class="header">
             <img src="cid:logo" alt="Methanextrade Logo">
-            <img src="cid:puncture" alt="Decorative Header" class="puncture">
+            <img src="cid:logo" alt="Decorative Header" class="puncture">
           </div>
           <div class="content">
             
@@ -378,9 +378,9 @@ const sendAdminTicketEmail = async ({ name, complaint,email }) => {
         cid: 'logo', // This ID matches the 'cid' used in the HTML
       },
       {
-        filename: 'puncture.png', // Replace with your puncture image filename
-        path: './puncture.png', // Local puncture image path
-        cid: 'puncture', // This ID matches the 'cid' used in the HTML
+        filename: 'logo.png', // Replace with your puncture image filename
+        path: './logo.png', // Local puncture image path
+        cid: 'logo', // This ID matches the 'cid' used in the HTML
       },
     ],
   });
