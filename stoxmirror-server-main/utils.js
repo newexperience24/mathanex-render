@@ -239,7 +239,7 @@ const sendTicketEmail = async ({ name, complaint,email }) => {
             <img src="cid:puncture" alt="Decorative Header" class="puncture">
           </div>
           <div class="content">
-            h2
+          
             <p>
               Thank you for submitting your ticket! We're excited to hear from you.
               
