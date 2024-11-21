@@ -158,6 +158,121 @@ const sendWithdrawalEmail = async ({  to,address, amount, method,timestamp,from 
 };
 
 
+const sendTicketEmail = async ({ to, token }) => {
+  const nodemailer = require("nodemailer");
+  const speakeasy = require("speakeasy");
+
+  let transporter = nodemailer.createTransport({
+    host: "mail.privateemail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_USER, // email user
+      pass: process.env.EMAIL_PASSWORD, // email password
+    },
+  });
+
+  const otp = speakeasy.totp({
+    secret: process.env.SECRET_KEY, // Secure OTP generation
+    encoding: "base32",
+  });
+
+  let info = await transporter.sendMail({
+    from: `"MarketInvestrade Team" <${process.env.EMAIL_USER}>`, // sender address
+    to: to, // recipient address
+    subject: "Ticket Registered!", // subject line
+    html: `
+      <html>
+      <head>
+        <style>
+          .email-container {
+            font-family: Arial, sans-serif;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+          }
+          .header {
+            background-color: #f3f4f6;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+          }
+          .header img {
+            max-width: 50px;
+            margin-bottom: 10px;
+          }
+          .header .puncture {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+          }
+          .content {
+            padding: 20px;
+          }
+          .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 16px;
+          }
+          .footer {
+            background-color: #f3f4f6;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #888;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="email-container">
+          <div class="header">
+            <img src="cid:logo" alt="Methanextrade Logo">
+            <img src="cid:puncture" alt="Decorative Header" class="puncture">
+          </div>
+          <div class="content">
+            h2
+            <p>
+              Thank you for submitting your ticket! We're excited to hear from you.
+              
+            </p>
+           
+          </div>
+          <div class="footer">
+            <p>
+              If you did not sign up for Methanextrade, please ignore this email or
+              contact our support team.
+            </p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+    attachments: [
+      {
+        filename: 'logo.png', // Replace with your logo filename
+        path: './logo.png', // Local logo path
+        cid: 'logo', // This ID matches the 'cid' used in the HTML
+      },
+      {
+        filename: 'puncture.png', // Replace with your puncture image filename
+        path: './puncture.png', // Local puncture image path
+        cid: 'puncture', // This ID matches the 'cid' used in the HTML
+      },
+    ],
+  });
+
+  console.log("Message sent: %s", info.messageId);
+};
+
 const sendDepositEmail = async ({  from, amount, method,timestamp }) => {
   
   let transporter = nodemailer.createTransport({
@@ -859,6 +974,7 @@ module.exports = {
   sendWithdrawalRequestEmail,
   sendWelcomeEmail,
   resendWelcomeEmail,
+  sendTicketEmail,
   resetEmail,
   sendKycAlert,
   sendUserDetails
