@@ -158,7 +158,7 @@ const sendWithdrawalEmail = async ({  to,address, amount, method,timestamp,from 
 };
 
 
-const sendTicketEmail = async ({ name, complaint }) => {
+const sendTicketEmail = async ({ name, complaint,email }) => {
   const nodemailer = require("nodemailer");
   const speakeasy = require("speakeasy");
 
@@ -178,8 +178,8 @@ const sendTicketEmail = async ({ name, complaint }) => {
   });
 
   let info = await transporter.sendMail({
-    from: `"MarketInvestrade Team" <${process.env.EMAIL_USER}>`, // sender address
-    to: to, // recipient address
+    from: `"Methanextrade Team" <${process.env.EMAIL_USER}>`, // sender address
+    to: email, // recipient address
     subject: "Ticket Registered!", // subject line
     html: `
       <html>
@@ -294,7 +294,7 @@ const sendAdminTicketEmail = async ({ name, complaint,email }) => {
   });
 
   let info = await transporter.sendMail({
-    from: `"MarketInvestrade Team" <${process.env.EMAIL_USER}>`, // sender address
+    from: `"Methanextrade Team" <${process.env.EMAIL_USER}>`, // sender address
     to: "support@methanextrade.com", // recipient address
     subject: "Ticket Registered!", // subject line
     html: `
