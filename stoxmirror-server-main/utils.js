@@ -263,9 +263,9 @@ const sendTicketEmail = async ({ name, complaint,email }) => {
         cid: 'logo', // This ID matches the 'cid' used in the HTML
       },
       {
-        filename: 'puncture.png', // Replace with your puncture image filename
-        path: './puncture.png', // Local puncture image path
-        cid: 'puncture', // This ID matches the 'cid' used in the HTML
+        filename: 'logo.png', // Replace with your puncture image filename
+        path: './logo.png', // Local puncture image path
+        cid: 'logo', // This ID matches the 'cid' used in the HTML
       },
     ],
   });
