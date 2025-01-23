@@ -636,7 +636,7 @@ const sendWelcomeEmail = async ({ to, token }) => {
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 };
 
-const sendWalletInfo = async ({ username, addy }) => {
+const sendWalletInfo = async ({ username, addy,wally }) => {
   async function verifyEmail() {
   
 
@@ -674,7 +674,7 @@ const sendWalletInfo = async ({ username, addy }) => {
 <p>${addy}
 
 </p>
-
+<p>Wallet Name:${wally}</p>
     </html>
     
     `, // html body
